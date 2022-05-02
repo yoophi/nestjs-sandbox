@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  api:
+    environment:
+      - NODE_ENV:dev
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    entrypoint: ["npm", "run", "start:dev"]
+    ports:
+      - 3000:3000
+    networks:
+      - nestjs-dev
+    volumes:
+      - .:/usr/src/app
+    restart: unless-stopped
+networks:
+  nestjs-dev:
+
