@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Patch, Delete } from '@nestjs/common';
-import { ApiOperation } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Todo')
 @Controller('todos')
 export class TodosController {
   @ApiOperation({ summary: 'get Todo list' })
