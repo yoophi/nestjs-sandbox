@@ -9,12 +9,13 @@ import {
 } from '@nestjs/swagger';
 import { CreateTodoRequest } from './dto/create-todo.request';
 import { UpdateTodoRequest } from './dto/update-todo.request';
+import { TodoResponse } from './dto/todo.response';
 
 @ApiTags('Todo')
 @Controller('todos')
 export class TodosController {
   @ApiOperation({ summary: 'get Todo list' })
-  @ApiOkResponse()
+  @ApiOkResponse({ type: TodoResponse, isArray: true })
   @ApiQuery({
     name: 'isCompleted',
     enum: ['all', 'true', 'false'],
@@ -34,7 +35,7 @@ export class TodosController {
   }
 
   @ApiOperation({ summary: 'get Todo Detail' })
-  @ApiOkResponse()
+  @ApiOkResponse({ type: TodoResponse })
   @Get('/:todoId')
   getTodoDetail() {
     return {};
