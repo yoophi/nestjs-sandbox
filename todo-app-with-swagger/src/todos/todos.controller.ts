@@ -1,17 +1,24 @@
-import { Controller, Delete, Get, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Patch, Post } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
   ApiCreatedResponse,
   ApiOkResponse,
   ApiOperation,
+  ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
+import { CreateTodoRequest } from './dto/create-todo.request';
+import { UpdateTodoRequest } from './dto/update-todo.request';
 
 @ApiTags('Todo')
 @Controller('todos')
 export class TodosController {
   @ApiOperation({ summary: 'get Todo list' })
   @ApiOkResponse()
+  @ApiQuery({
+    name: 'isCompleted',
+    enum: ['all', 'true', 'false'],
+  })
   @Get()
   getTodoList() {
     return [];
@@ -22,7 +29,7 @@ export class TodosController {
   @ApiCreatedResponse()
   @ApiBadRequestResponse()
   @Post()
-  createTodo() {
+  createTodo(@Body() createTodoRequest: CreateTodoRequest) {
     return [];
   }
 
@@ -37,7 +44,7 @@ export class TodosController {
   @ApiOkResponse()
   @ApiBadRequestResponse()
   @Patch('/:todoId')
-  updateTodo() {
+  updateTodo(@Body() updateTodoRequest: UpdateTodoRequest) {
     return {};
   }
 
